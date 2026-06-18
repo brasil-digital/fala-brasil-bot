@@ -207,10 +207,30 @@ def combinar_video_audio(caminho_video: Path, caminho_audio: Path, saida: Path) 
 # ─────────────────────────────────────────────
 def autenticar_youtube():
     """Autentica via OAuth2 e retorna serviço YouTube."""
+    from google.oauth2.credentials import Credentials
+
     SCOPES = ["https://www.googleapis.com/auth/youtube.upload"]
+
+    # Modo GitHub Actions: usa variáveis de ambiente
+    refresh_token = os.getenv("YOUTUBE_REFRESH_TOKEN")
+    client_id     = os.getenv("YOUTUBE_CLIENT_ID")
+    client_secret = os.getenv("YOUTUBE_CLIENT_SECRET")
+
+    if refresh_token and client_id and client_secret:
+        creds = Credentials(
+            token=None,
+            refresh_token=refresh_token,
+            client_id=client_id,
+            client_secret=client_secret,
+            token_uri="https://oauth2.googleapis.com/token",
+            scopes=SCOPES,
+        )
+        creds.refresh(Request())
+        return build("youtube", "v3", credentials=creds)
+
+    # Modo local: usa pickle
     creds = None
     token_path = Path("youtube_token.pickle")
-
     if token_path.exists():
         with open(token_path, "rb") as f:
             creds = pickle.load(f)
