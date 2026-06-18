@@ -29,7 +29,10 @@ jobs:
           python - <<'EOF'
           import os, base64
           open("client_secrets.json", "w").write(os.environ["YOUTUBE_CLIENT_SECRETS"])
-          open("youtube_token.pickle", "wb").write(base64.b64decode(os.environ["YOUTUBE_TOKEN_B64"]))
+          token_b64 = os.environ["YOUTUBE_TOKEN_B64"].strip()
+          # Corrige padding do base64
+          token_b64 += "=" * (4 - len(token_b64) % 4) if len(token_b64) % 4 else ""
+          open("youtube_token.pickle", "wb").write(base64.b64decode(token_b64))
           EOF
 
       - name: Criar arquivo .env
