@@ -22,9 +22,15 @@ jobs:
         run: pip install openai google-api-python-client google-auth-oauthlib moviepy requests python-dotenv pillow numpy
 
       - name: Restaurar credenciais do YouTube
+        env:
+          YOUTUBE_CLIENT_SECRETS: ${{ secrets.YOUTUBE_CLIENT_SECRETS }}
+          YOUTUBE_TOKEN_B64: ${{ secrets.YOUTUBE_TOKEN_B64 }}
         run: |
-          printf '%s' "${{ secrets.YOUTUBE_CLIENT_SECRETS }}" > client_secrets.json
-          printf '%s' "${{ secrets.YOUTUBE_TOKEN_B64 }}" | base64 --decode --ignore-garbage > youtube_token.pickle
+          python - <<'EOF'
+          import os, base64
+          open("client_secrets.json", "w").write(os.environ["YOUTUBE_CLIENT_SECRETS"])
+          open("youtube_token.pickle", "wb").write(base64.b64decode(os.environ["YOUTUBE_TOKEN_B64"]))
+          EOF
 
       - name: Criar arquivo .env
         run: |
