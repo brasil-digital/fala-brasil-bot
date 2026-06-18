@@ -1,0 +1,7 @@
+.env
+chaves.txt
+client_secrets.json
+youtube_token.pickle
+output_videos/
+__pycache__/
+*.pyc
