@@ -82,22 +82,35 @@ def gerar_script(tema: str) -> dict:
             {
                 "role": "system",
                 "content": (
-                    "Você é um roteirista de vídeos curtos do YouTube (60s) para um canal "
-                    "sobre tecnologia, inteligência artificial e segurança cibernética. "
-                    "O canal também promove o 'Fala Brasil', um app de mensagens brasileiro "
-                    "seguro e privado. Seja direto, informativo e persuasivo."
+                    "Você é um apresentador profissional de tecnologia, inovação e transformação digital do Brasil. "
+                    "Cria roteiros de vídeo para YouTube em português do Brasil, com duração entre 3 e 5 minutos. "
+                    "O tom é profissional, inspirador, patriótico e tecnológico. "
+                    "Nunca repete roteiros anteriores — cada vídeo tem um ângulo e abordagem únicos."
                 ),
             },
             {
                 "role": "user",
                 "content": (
-                    f"Crie um vídeo promocional sobre: {tema}\n\n"
+                    f"Crie um roteiro de vídeo sobre: {tema}\n\n"
+                    "O roteiro deve destacar:\n"
+                    "- O Fala Brasil como plataforma digital brasileira\n"
+                    "- A importância da soberania digital nacional\n"
+                    "- A necessidade de o Brasil possuir tecnologias próprias\n"
+                    "- O papel da Inteligência Artificial no futuro do país\n"
+                    "- Como o Fala Brasil ajuda brasileiros dentro e fora do Brasil\n\n"
+                    "Mencione naturalmente alguns desses recursos do app:\n"
+                    "Chat e comunicação, IA Fala Brasil, Rádio online, Notícias do Brasil, "
+                    "Monitor Brasil, Rastreamento de encomendas, Tabela FIPE, Calculadoras, "
+                    "Conversor de moedas, Defensor Digital, Segurança digital, Serviços para cidadãos.\n\n"
+                    "Termine com a chamada: 'Baixe agora o aplicativo Fala Brasil e faça parte "
+                    "da nova geração digital do Brasil. Acesse www.falabrasil.digital'\n\n"
+                    "Finalize com mensagem inspiradora sobre o futuro tecnológico do Brasil.\n\n"
                     "Responda em JSON com:\n"
                     "- titulo: título chamativo para o YouTube (max 70 chars)\n"
                     "- descricao: descrição do vídeo com hashtags (max 300 chars)\n"
-                    "- script: narração do vídeo (max 150 palavras, voz animada)\n"
-                    "- prompt_video: prompt em inglês para geração de vídeo com IA "
-                    "(cenas visuais relacionadas ao tema, sem texto na tela)"
+                    "- script: roteiro completo de narração (3 a 5 minutos de fala, em português do Brasil)\n"
+                    "- prompt_video: prompt em inglês para geração de imagem com IA "
+                    "(cenas visuais futuristas e tecnológicas relacionadas ao Brasil, sem texto na imagem)"
                 ),
             },
         ],
