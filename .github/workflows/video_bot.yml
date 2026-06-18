@@ -21,16 +21,14 @@ jobs:
       - name: Instalar dependências
         run: pip install openai google-api-python-client google-auth-oauthlib moviepy requests python-dotenv pillow numpy
 
-      - name: Criar arquivo .env com credenciais YouTube
-        run: |
-          echo "YOUTUBE_REFRESH_TOKEN=${{ secrets.YOUTUBE_REFRESH_TOKEN }}" >> .env
-          echo "YOUTUBE_CLIENT_ID=${{ secrets.YOUTUBE_CLIENT_ID }}" >> .env
-          echo "YOUTUBE_CLIENT_SECRET=${{ secrets.YOUTUBE_CLIENT_SECRET }}" >> .env
-
       - name: Criar arquivo .env
         run: |
           echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" > .env
           echo "RUNWAY_API_KEY=${{ secrets.RUNWAY_API_KEY }}" >> .env
 
       - name: Rodar o bot
+        env:
+          YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
+          YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
         run: python fala_brasil_bot.py
