@@ -23,8 +23,8 @@ jobs:
 
       - name: Restaurar credenciais do YouTube
         run: |
-          echo "${{ secrets.YOUTUBE_CLIENT_SECRETS }}" > client_secrets.json
-          echo "${{ secrets.YOUTUBE_TOKEN_B64 }}" | base64 -d > youtube_token.pickle
+          printf '%s' "${{ secrets.YOUTUBE_CLIENT_SECRETS }}" > client_secrets.json
+          printf '%s' "${{ secrets.YOUTUBE_TOKEN_B64 }}" | base64 --decode --ignore-garbage > youtube_token.pickle
 
       - name: Criar arquivo .env
         run: |
