@@ -2,7 +2,7 @@ name: Fala Brasil Bot - Publicar Vídeo Diário
 
 on:
   schedule:
-    - cron: '0 13 * * *'   # Todo dia às 10h horário de Brasília (UTC-3 = 13h UTC)
+    - cron: '0 9 * * *'   # Todo dia às 6h horário de Brasília (UTC-3 = 9h UTC)
   workflow_dispatch:         # Permite rodar manualmente pelo GitHub
 
 jobs:
